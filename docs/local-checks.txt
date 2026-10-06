@@ -1,0 +1,7 @@
+Local verification: Windows, Python 3.12.14, SQLite.
+............................                                             [100%]
+28 passed in 20.75s
+Watching source files; press Ctrl+C to stop.
+Change detected: rerunning checks.
+............................                                             [100%]
+28 passed in 20.03s

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Campus Parking & Schedule Assistant</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main><header><p class="eyebrow">CS 690 · MILESTONE 2</p><h1>Campus parking,<br>planned around class.</h1><p>Compare permitted lots using your next class and reported spaces.</p></header>
+<p id="message" role="status"></p>
+<section id="login-panel"><h2>Sign in</h2><form id="login"><label>Email<input name="email" type="email" required value="alex@example.test"></label><label>Password<input name="password" type="password" required></label><button>Sign in</button></form>
+<p class="note">Local demonstration: alex@example.test (student) or jordan@example.test (administrator). Password: DemoParking123! Fictional data only.</p></section>
+<section id="dashboard" hidden><div class="row"><h2 id="welcome">Dashboard</h2><button id="logout" class="secondary">Sign out</button></div>
+<div id="student" hidden><button id="refresh">Refresh recommendation</button><article id="recommendation"></article><h3>Weekly schedule</h3><ul id="classes"></ul></div>
+<div id="admin" hidden><p>Update reported spaces or close a lot. Student recommendations use the saved changes.</p><div id="lots"></div></div></section>
+<footer>Starter demonstration · Space counts are reported estimates, not reservations.</footer></main><script src="/static/app.js"></script></body></html>
+
