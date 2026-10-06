@@ -70,7 +70,8 @@ Press Ctrl+C to stop it. Tests use disposable temporary SQLite databases.
 They never write to the demonstration database.
 
 .github/workflows/ci.yml runs the same checks on pushes and pull requests.
-Hosted workflow results are available on the repository Actions tab.
+GitHub Actions run #1 passed all 28 tests on October 6, 2026:
+https://github.com/SamarthThakor/smart-campus-parking/actions/runs/37545401805
 
 ## MySQL option (not yet integration-tested)
 Create an empty MySQL 8 database and a dedicated application user.

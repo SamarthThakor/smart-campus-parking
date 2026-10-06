@@ -11,7 +11,8 @@ Database: temporary SQLite databases for tests; file-based SQLite for live HTTP 
 - Student recommendation changed from Lot B to Lot A after an admin closed Lot B.
 - The demo restored Lot B afterward.
 - Schema definitions compiled to MySQL DDL; MySQL execution was not tested.
-- GitHub Actions configuration is included; a hosted run is pending publication.
+- GitHub Actions run #1 passed: https://github.com/SamarthThakor/smart-campus-parking/actions/runs/37545401805
+- Hosted run: 28 tests passed in 5.96 seconds on source commit 58f830c243d50e5cfcd9eed4fd3f00129f83f1f0.
 - Browser UI automation was unavailable in this environment; no browser test pass is claimed.
 
 Raw evidence: local-checks.txt and http-demo.json.
