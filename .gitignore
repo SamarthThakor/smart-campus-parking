@@ -7,3 +7,5 @@ instance/
 *.db
 artifacts/
 
+.coverage
+.test-temp/

@@ -1,145 +1,131 @@
-# Smart Campus Parking & Schedule Assistant
-CS 690, Milestone 2 · Samarth Thakor and Nirmal Naik
+# Smart Campus Parking
 
-Working Flask starter for parking recommendations based on the next class.
-All seeded data and accounts are fictional.
+CS 690 - Milestone 3: Minimum Viable Product  
+Samarth Thakor and Nirmal Naik
 
-## Implemented scope
-- Session login/logout, hashed passwords and CSRF protection.
-- Student browser dashboard with next class, recommendation and walking time.
-- Schedule CRUD, registration and permit selection through JSON APIs.
-- Administrator browser dashboard for space counts and lot closures.
-- Administrator API for accepted-permit rules.
-- Automated behavior tests, local source-change watcher and GitHub Actions configuration.
+Students create an account, save a permit, manage their weekly classes, and get a
+parking recommendation. Administrators change lot status and reported space counts.
+The browser calls Flask JSON routes, and SQLAlchemy commits records to a persistent
+SQLite database. All sample campus locations and demo accounts are fictional.
 
-SQLite is the verified local database. MySQL remains the Milestone 1 deployment
-target. SQLAlchemy and a MySQL driver are included, but MySQL integration and
-AWS deployment have not been executed. The student UI shows seeded schedules;
-schedule editing and registration APIs do not yet have complete browser forms.
+The project was previously titled **Smart Campus Parking & Schedule Assistant**.
+Milestone 3 uses the shorter name **Smart Campus Parking**; class scheduling remains
+part of the parking workflow. Historical milestone PDFs retain their submitted titles.
 
-## Prerequisites and cloning
-Use Python 3.12 (verified locally with 3.12.14), a browser, and Git for cloning.
-Internet access is needed for initial dependency installation.
-Extract this package and open a terminal in the folder containing README.md.
-To clone the private repository after signing in to GitHub:
-    git clone https://github.com/SamarthThakor/smart-campus-parking.git
-    cd smart-campus-parking
+## Run locally
 
-## Windows quickstart (PowerShell)
-    python -m venv .venv
-    .venv\Scripts\python -m pip install -r requirements-dev.txt
-    Copy-Item .env.example .env
-    .venv\Scripts\python -m flask --app app:create_app init-db
-    .venv\Scripts\python -m flask --app app:create_app seed-demo
-    .venv\Scripts\python -m flask --app app:create_app run
+Requires Python 3.12. Clone this public repository or extract the supplied ZIP.
 
-Open http://127.0.0.1:5000. The default database is instance/parking.db.
-init-db creates missing tables; it does not migrate existing schemas.
-seed-demo refuses to run when users already exist, preserving existing records.
-On macOS/Linux replace .venv\Scripts\python with .venv/bin/python and use
-cp .env.example .env.
+```powershell
+python -m venv .venv
+.venv\Scripts\python -m pip install -r requirements-dev.txt
+Copy-Item .env.example .env
+.venv\Scripts\python -m flask --app app:create_app seed-demo
+.venv\Scripts\python -m flask --app app:create_app run
+```
 
-## Demonstration accounts
-Student: alex@example.test
-Administrator: jordan@example.test
-Password for both: DemoParking123!
+Open http://127.0.0.1:5000. On Linux/macOS use `.venv/bin/python` and `cp`.
+Application startup applies Alembic migrations automatically, before serving requests.
+The default database is `instance/parking.db`; it persists after browser or server restarts.
+Run `seed-demo` once on an empty database. It refuses to overwrite existing users.
 
-These public fictional credentials are for local demonstrations only.
-Seeded schedules include a 10:00 class every day, including weekends, so the
-example works on any run date. Coordinates and walking times are illustrative.
+Local demo accounts: `alex@example.test` (student) and `jordan@example.test` (admin).
+Both use `DemoParking123!`. You can also register a new student in the browser.
+The signup form never creates administrators.
 
-## Reproduce the core demonstration
-1. Sign in as Alex. Lot B is recommended: 18 spaces, 5-minute walk.
-2. Sign out; sign in as Jordan. Set Lot B to closed and click Save.
-3. Sign out; sign in as Alex. Lot A is now recommended: 10 spaces, 8-minute walk.
-4. Restore Lot B to open as Jordan to reset the demonstration.
+## Demonstrate the vertical slice
 
-Lot C starts closed; Staff Lot does not accept student permits.
-Counts are reported estimates, not reservations.
-A repeatable HTTP demonstration with captured JSON responses is available:
-    .venv\Scripts\python scripts/capture_demo.py
-The server must be running first. It temporarily closes Lot B and restores it.
+1. Create a student account, select **Student**, and save the permit.
+2. Add a class at Library Building for tomorrow at 10:00-11:00, using the displayed
+   campus time zone. The saved class appears in the schedule.
+3. See Lot B, 18 reported spaces, a five-minute walk and the accepted permit list.
+4. Restart Flask, then sign in again. The account, permit and class still exist.
+5. In a separate browser session, sign in as Jordan and close Lot B. Click **Save lot**.
+6. Refresh the student's parking plan. Lot A replaces Lot B, with an eight-minute walk.
+7. Reopen Lot B after demonstrating. Editing/deleting a class and invalid time errors
+   can also be shown from the schedule form.
 
-## Automated verification
-    .venv\Scripts\python scripts/check.py
-    .venv\Scripts\python scripts/check.py --watch
+Future-day recommendations are provisional. Counts are administrator reports, not
+reservations or forecasts. Class and parking times display in `CAMPUS_TIMEZONE`.
 
-Checks compile Python modules and run pytest. Failures return nonzero exit codes.
-Watch mode reruns checks when application, test or dependency files change.
-Press Ctrl+C to stop it. Tests use disposable temporary SQLite databases.
-They never write to the demonstration database.
+## Database migrations and integrity
 
-.github/workflows/ci.yml runs the same checks on pushes and pull requests.
-GitHub Actions run #1 passed all 28 tests on October 6, 2026:
-https://github.com/SamarthThakor/smart-campus-parking/actions/runs/37545401805
+`app/migrations.py` runs `alembic.command.upgrade(config, "head")` at startup.
+The migrations are frozen separately from current application models:
 
-## MySQL option (not yet integration-tested)
-Create an empty MySQL 8 database and a dedicated application user.
-Set DATABASE_URL in .env, URL-encoding special password characters:
-    mysql+pymysql://parking_user:ENCODED_PASSWORD@127.0.0.1/campus_parking
+- `0001_initial`: seven related tables for users, permits, buildings, classes, lots,
+  lot-permit rules and walking estimates.
+- `0002_lot_audit`: adds an administrator update history table without replacing
+  existing records. Each lot change and its audit entry commit in one transaction.
 
-Run init-db and seed-demo. docs/schema_mysql.sql is generated from the same
-SQLAlchemy metadata for review. Compiling SQL is not a MySQL integration test.
-Introduce versioned migrations before changing an existing schema later.
+`alembic_version` records the current revision. A repeat startup performs no schema
+changes. Tests upgrade a populated revision 0001 database and verify its records survive.
+SQLite foreign-key enforcement is enabled on every application connection. Foreign
+keys, unique email/permit names, composite keys, non-null columns and check constraints
+protect the data; server validation checks time ranges, capacity and record ownership.
 
-## Configuration and deployment
-DATABASE_URL defaults to the local SQLite file.
-CAMPUS_TIMEZONE defaults to America/New_York.
-SECRET_KEY should be set to a long random value before shared use.
-Without it, local sessions use a random per-process key and reset on restart.
-APP_HTTPS=1 enables Secure cookies for an HTTPS deployment.
-.env, databases and virtual environments are excluded from Git.
+Keep any old MS2 `parking.db` as a backup. An unversioned database is deliberately
+rejected rather than silently stamped or overwritten. For this MVP, start a new file
+by setting a new absolute SQLite `DATABASE_URL` in `.env`. No existing user database
+is deleted by the setup. Data import from unversioned MS2 files is future work.
 
-Production WSGI serving, HTTPS, rate limiting, password reset, deployment secrets,
-backups and optional maps are future deployment/product work.
+Back up a stopped local database by copying its file. Restore the copy with the same
+application version and start it to apply any newer migrations. Never run competing
+migration processes; the local MVP uses a single Flask process. Production deployment
+should run one migration job before starting workers.
 
-## API conventions
-Fetch GET /api/auth/csrf and retain the cookie. Send X-CSRF-Token on every
-changing request, including login. Login returns a rotated csrf_token.
-Use JSON bodies. Class operations check record ownership; admin routes check roles.
+SQLite is a real file-backed relational database, not an in-memory mock. It is sufficient
+for this local MVP. MySQL/RDS and AWS remain planned deployment work and are not verified
+by this milestone. The old MySQL schema export in `docs/` is historical MS2 evidence.
 
-POST /api/auth/login:
-    {"email":"alex@example.test","password":"DemoParking123!"}
-POST /api/classes:
-    {"title":"Databases","weekday":2,"start_time":"12:00",
-     "end_time":"13:00","building_id":1}
-PATCH /api/admin/lots/2:
-    {"status":"closed"}
+## Tests and continuous integration
 
-Codes: 200 success, 201 created, 204 no content, 400 invalid data,
-401 missing session or bad login, 403 role/CSRF failure, 404 missing or not-owned
-record, 409 duplicate email, 500 database error, 503 health-check database failure.
+```powershell
+.venv\Scripts\python scripts/check.py
+.venv\Scripts\python -m playwright install chromium
+.venv\Scripts\python scripts/browser_demo.py
+```
 
-## Team workflow
-Use main for reviewed work and feature/name or fix/name branches.
-Use focused commits with feat:, fix:, test: or docs: prefixes.
-Each pull request states the change and test results; the other member reviews.
-Require passing checks and one review through repository settings when available.
-These rules are policies until the remote repository is configured.
+`check.py` compiles Python and runs unit/integration tests with statement coverage.
+Coverage below 85% fails the check. XML/JSON coverage and JUnit reports are saved to
+`artifacts/`. `--watch` reruns backend checks on source changes.
 
-Samarth leads frontend and coordination; Nirmal leads backend, data, QA and cloud.
-Both maintain interfaces, test scenarios and review documentation.
+`browser_demo.py` launches an isolated live Flask server and a real browser. It tests
+registration, permit selection, schedule creation/edit/deletion, restart persistence,
+admin closure, changed recommendations, validation and a mobile-width layout. It saves
+screenshots, startup logs and `result.json` under `artifacts/browser/`. Its database is
+isolated from the user's demo database. Set `BROWSER_CHANNEL=chrome` to use installed
+Chrome instead of downloaded Chromium when needed.
 
-## Repository access
+`.github/workflows/ci.yml` runs backend tests and the browser flow on **every push and
+pull request**, then uploads evidence even if a check fails. A configured workflow is
+distinct from an observed passing run; see the Milestone 3 verification record for
+the actual PR run and tested commit. Branch protection is not configured by this work.
+
+## Configuration
+
+- `DATABASE_URL`: defaults to the local SQLite file.
+- `CAMPUS_TIMEZONE`: defaults to `America/New_York`.
+- `SECRET_KEY`: set a long random value for shared use; otherwise sessions reset
+  when the application restarts. Database records remain saved.
+- `APP_HTTPS=1`: enables Secure cookies after configuring HTTPS.
+
+Session cookies are HttpOnly and SameSite=Lax; writes require a CSRF token. Passwords
+are hashed. Student class routes enforce ownership, and lot writes require an admin.
+The local development server, public demo passwords, and untested deployment settings
+are not a production hosting setup. HTTPS, rate limiting, password recovery, optional
+maps and MySQL deployment remain future work.
+
+## Milestone 3 handoff
+
+The PDF is in `docs/CS690_Milestone3_Minimum_Viable_Product.pdf`.
+`docs/DEMO_AND_FEEDBACK.md` contains the live-demo script and feedback record.
+The live classroom demonstration is October 22, 2026; submission is October 23.
+Actual peer/instructor feedback must be added after the demonstration. No classroom
+feedback is invented or represented as already received.
+
+Samarth leads frontend and coordination; Nirmal leads backend, database, testing and
+cloud planning. Both review the workflow and prepare the demonstration. Use feature
+branches and pull requests, with the other team member reviewing before merge.
+
 Repository: https://github.com/SamarthThakor/smart-campus-parking
-This repository is private. The owner must grant the instructor and teammate
-access before they can clone it or view the submission. Check the Actions tab
-for hosted verification results.
-
-## Files
-app/                  Factory, models, services, routes, templates and static assets
-tests/                Automated behavior tests
-scripts/check.py      Build/test automation and watch mode
-scripts/capture_demo.py  Live HTTP demonstration
-.github/workflows/    Hosted CI configuration
-docs/                 Schema and verification evidence
-requirements*.txt     Pinned packages
-.env.example          Configuration template
-
-## References
-Course Lecture 3: Features, Scenarios, and Stories.
-Course Lecture 4: Software Architecture.
-Flask testing: https://flask.palletsprojects.com/en/stable/testing/
-SQLAlchemy constraints: https://docs.sqlalchemy.org/en/20/core/constraints.html
-GitHub Actions: https://docs.github.com/en/actions/get-started/quickstart
-

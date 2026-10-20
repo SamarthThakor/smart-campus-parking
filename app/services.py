@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 from sqlalchemy import select
-from .models import users, classes, lots, lot_permits, walks, buildings
+from .models import users, classes, lots, lot_permits, walks, buildings, permits
 
 def get_next_class(conn,user_id,now):
     if now.tzinfo is None:
@@ -19,7 +19,7 @@ def get_next_class(conn,user_id,now):
 
 def recommend_parking(conn,user_id,now):
     next_class=get_next_class(conn,user_id,now)
-    result=dict(class_info=next_class,recommendation=None,alternatives=[],reason=None)
+    result=dict(class_info=next_class,recommendation=None,alternatives=[],reason=None,campus_timezone=str(now.tzinfo),provisional=bool(next_class and datetime.fromisoformat(next_class["starts_at"]).date()!=now.date()))
     if next_class is None:
         result["reason"]="no_upcoming_class"; return result
     permit_id=conn.execute(select(users.c.permit_id).where(users.c.user_id==user_id)).scalar()
@@ -29,6 +29,7 @@ def recommend_parking(conn,user_id,now):
     candidates=[]
     for record in conn.execute(query).mappings():
         lot=dict(record)
+        lot["accepted_permits"]=list(conn.execute(select(permits.c.name).join(lot_permits,permits.c.permit_id==lot_permits.c.permit_id).where(lot_permits.c.lot_id==lot["lot_id"]).order_by(permits.c.name)).scalars())
         parked_by=datetime.fromisoformat(next_class["starts_at"])-timedelta(minutes=lot["walking_minutes"]+5)
         lot.update(permit_eligible=True,parked_by=parked_by.isoformat(),late_arrival_warning=now>parked_by)
         candidates.append(lot)
@@ -50,6 +51,9 @@ def update_lot(conn,lot_id,changes):
         raise ValueError("Available spaces must be between zero and capacity.")
     if status not in {"open","closed"}:
         raise ValueError("Status must be open or closed.")
-    conn.execute(lots.update().where(lots.c.lot_id==lot_id).values(available_spaces=spaces,status=status,updated_at=datetime.now(timezone.utc).isoformat()))
+    values=dict(available_spaces=spaces,status=status)
+    if "available_spaces" in changes:
+        values["updated_at"]=datetime.now(timezone.utc).isoformat()
+    conn.execute(lots.update().where(lots.c.lot_id==lot_id).values(**values))
     return dict(conn.execute(select(lots).where(lots.c.lot_id==lot_id)).mappings().one())
 

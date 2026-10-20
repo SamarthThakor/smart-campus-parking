@@ -37,12 +37,14 @@ def create_app(config=None):
         def foreign_keys(connection,_):
             connection.execute("PRAGMA foreign_keys=ON")
     app.extensions["db"]=engine
+    from .migrations import upgrade_database
+    upgrade_database(engine)
     from .routes import api
     app.register_blueprint(api)
     @app.cli.command("init-db")
     def init_db():
-        """Create missing tables. Existing schemas are not migrated."""
-        metadata.create_all(engine); click.echo("Database tables initialized.")
+        """Apply all pending versioned migrations."""
+        upgrade_database(engine); click.echo("Database is at the latest migration.")
     @app.cli.command("seed-demo")
     def seed_demo_command():
         """Load fictional records into an initialized, empty database."""

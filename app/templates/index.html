@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Campus Parking & Schedule Assistant</title><link rel="stylesheet" href="/static/style.css"></head>
-<body><main><header><p class="eyebrow">CS 690 · MILESTONE 2</p><h1>Campus parking,<br>planned around class.</h1><p>Compare permitted lots using your next class and reported spaces.</p></header>
-<p id="message" role="status"></p>
-<section id="login-panel"><h2>Sign in</h2><form id="login"><label>Email<input name="email" type="email" required value="alex@example.test"></label><label>Password<input name="password" type="password" required></label><button>Sign in</button></form>
-<p class="note">Local demonstration: alex@example.test (student) or jordan@example.test (administrator). Password: DemoParking123! Fictional data only.</p></section>
-<section id="dashboard" hidden><div class="row"><h2 id="welcome">Dashboard</h2><button id="logout" class="secondary">Sign out</button></div>
-<div id="student" hidden><button id="refresh">Refresh recommendation</button><article id="recommendation"></article><h3>Weekly schedule</h3><ul id="classes"></ul></div>
-<div id="admin" hidden><p>Update reported spaces or close a lot. Student recommendations use the saved changes.</p><div id="lots"></div></div></section>
-<footer>Starter demonstration · Space counts are reported estimates, not reservations.</footer></main><script src="/static/app.js"></script></body></html>
-
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Campus Parking</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><main>
+<header><div class="brand"><span class="mark">P</span> Smart Campus Parking</div><p class="eyebrow">LESS SEARCHING. MORE TIME.</p><h1>Campus parking,<br>planned around class.</h1><p>Find an open, permitted lot near your next class.</p></header>
+<p id="message" role="status" aria-live="polite"></p>
+<section id="login-panel" class="card"><h2 id="auth-title">Welcome back</h2><p id="auth-help">Sign in to see your schedule and parking options.</p>
+<form id="login"><label>Email<input name="email" type="email" required autocomplete="username"></label><label>Password<input name="password" type="password" required autocomplete="current-password" maxlength="128"></label><button id="auth-submit">Sign in</button></form>
+<button id="auth-switch" class="link">Create a student account</button>
+<p class="note">Local demo: alex@example.test (student), jordan@example.test (admin). Password: DemoParking123! All demo locations and accounts are fictional.</p></section>
+<section id="dashboard" hidden><div class="row"><div><p class="eyebrow" id="account"></p><h2 id="welcome">Your parking plan</h2></div><button id="logout" class="secondary">Sign out</button></div>
+<div id="student" hidden>
+<div class="row"><p id="campus-time">Class times use the campus time zone.</p><button id="refresh" class="secondary">Refresh parking</button></div>
+<article id="recommendation" class="card recommendation"></article>
+<div class="student-grid"><section class="card"><h2>Your parking permit</h2><form id="permit-form"><label>Permit type<select id="permit" aria-label="Permit type" required></select></label><button>Save permit</button></form><p class="note">Only lots accepting your permit are recommended.</p></section>
+<section class="card"><h2 id="class-form-title">Add a class</h2><form id="class-form"><label>Class name<input name="title" required maxlength="100"></label><div class="pair"><label>Day<select name="weekday" aria-label="Day"><option value="0">Monday</option><option value="1">Tuesday</option><option value="2">Wednesday</option><option value="3">Thursday</option><option value="4">Friday</option><option value="5">Saturday</option><option value="6">Sunday</option></select></label><label>Building<select name="building_id" id="building" aria-label="Building" required></select></label></div><div class="pair"><label>Start time<input name="start_time" type="time" required></label><label>End time<input name="end_time" type="time" required></label></div><div class="row"><button id="class-save">Add class</button><button id="cancel-edit" type="button" class="secondary" hidden>Cancel edit</button></div></form></section></div>
+<section class="card"><h2>Weekly schedule</h2><p class="note">Times shown in the campus time zone.</p><div id="classes"></div></section>
+</div>
+<div id="admin" hidden><p>Keep reported spaces and lot status current. Saved changes apply to the next student parking request.</p><div id="lots" class="lot-grid"></div></div>
+</section>
+<footer>Reported availability does not reserve a space. Refresh before traveling.</footer>
+</main><script src="/static/app.js"></script></body></html>
