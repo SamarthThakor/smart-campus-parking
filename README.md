@@ -12,9 +12,18 @@ The project was previously titled **Smart Campus Parking & Schedule Assistant**.
 Milestone 3 uses the shorter name **Smart Campus Parking**; class scheduling remains
 part of the parking workflow. Historical milestone PDFs retain their submitted titles.
 
+## Milestone documentation
+
+- [Milestone 2 - archived README](docs/milestone-2/README.md): preserved starter documentation.
+- [Milestone 3 - MVP progress](docs/milestone-3/README.md): changes, verification evidence and remaining work.
+
+This main README describes the current Milestone 3 application and how to run it.
+
 ## Run locally
 
 Requires Python 3.12. Clone this public repository or extract the supplied ZIP.
+Open a terminal in the inner `smart-campus-parking` folder containing `requirements.txt`
+and this README before running the commands below.
 
 ```powershell
 python -m venv .venv
