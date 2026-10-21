@@ -14,8 +14,8 @@ part of the parking workflow. Historical milestone PDFs retain their submitted t
 
 ## Milestone documentation
 
-- [Milestone 2 - archived README](docs/milestone-2/README.md): preserved starter documentation.
-- [Milestone 3 - MVP progress](docs/milestone-3/README.md): changes, verification evidence and remaining work.
+- [Milestone 2 - archived README](README_Milestone2.md): preserved starter documentation.
+- [Milestone 3 - MVP progress](README_Milestone3.md): changes, verification evidence and remaining work.
 
 This main README describes the current Milestone 3 application and how to run it.
 
