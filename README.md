@@ -143,3 +143,10 @@ Flask testing: https://flask.palletsprojects.com/en/stable/testing/
 SQLAlchemy constraints: https://docs.sqlalchemy.org/en/20/core/constraints.html
 GitHub Actions: https://docs.github.com/en/actions/get-started/quickstart
 
+
+## Milestone READMEs
+
+- [Milestone 2](README_Milestone2.md) - preserved starter documentation.
+- [Milestone 3](README_Milestone3.md) - MVP progress, tests and evidence.
+
+Milestone 3 application changes are available in [pull request #1](https://github.com/SamarthThakor/smart-campus-parking/pull/1) and are not yet merged into main.
