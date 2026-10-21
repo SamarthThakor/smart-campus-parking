@@ -1,0 +1,60 @@
+{
+  "commit": "c5e856b97dc29d46225561ed908ce893314bf30d",
+  "event": "pull_request",
+  "run_number": 3,
+  "run_id": 39516238331,
+  "conclusion": "success",
+  "url": "https://github.com/SamarthThakor/smart-campus-parking/actions/runs/39516238331",
+  "jobs": [
+    {
+      "name": "verify",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -r requirements-dev.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python scripts/check.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m playwright install --with-deps chromium",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python scripts/browser_demo.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/upload-artifact@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
