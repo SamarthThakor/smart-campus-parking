@@ -1,4 +1,4 @@
-> **Milestone 2 archive.** The original README from commit [48bbedd](https://github.com/SamarthThakor/smart-campus-parking/tree/48bbedd454e62cc75bd956721b4a9e40cac793ff) is preserved below. It describes the project at that milestone, including historical setup instructions and repository-access wording. For current setup, use the [main README](https://github.com/SamarthThakor/smart-campus-parking/blob/feature/milestone-3-mvp/README.md); for progress since then, see [Milestone 3](README_Milestone3.md).
+> **Milestone 2 archive.** The original README from commit [48bbedd](https://github.com/SamarthThakor/smart-campus-parking/tree/48bbedd454e62cc75bd956721b4a9e40cac793ff) is preserved below. It describes the project at that milestone, including historical setup instructions and repository-access wording. For current setup, use the [Milestone 3 setup guide](README_Milestone3.md); for progress since then, see [Milestone 3](README_Milestone3.md).
 
 ---
 

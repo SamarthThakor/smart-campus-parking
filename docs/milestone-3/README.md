@@ -4,7 +4,7 @@
 CS 690 - Samarth Thakor and Nirmal Naik  
 Class demonstration: October 22, 2026 | Submission due: October 23, 2026
 
-[Current setup and running instructions](../../README.md) | [Milestone 2 archive](../milestone-2/README.md)
+[Current setup and running instructions](../../README_Milestone3.md) | [Milestone 2 archive](../milestone-2/README.md)
 
 ## What changed since Milestone 2
 
