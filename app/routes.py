@@ -1,13 +1,14 @@
 import re
+import json
 import secrets
-from datetime import datetime,time
+from datetime import datetime,time,timezone
 from zoneinfo import ZoneInfo
 from flask import Blueprint,current_app,g,jsonify,render_template,request,session
 from sqlalchemy import select,text
 from sqlalchemy.exc import IntegrityError,SQLAlchemyError
 from werkzeug.exceptions import HTTPException
 from werkzeug.security import check_password_hash,generate_password_hash
-from .models import users,permits,buildings,classes,lots,lot_permits
+from .models import users,permits,buildings,classes,lots,lot_permits,lot_updates
 from .services import get_next_class,recommend_parking,update_lot
 api=Blueprint("api",__name__)
 def fail(message,status=400): return jsonify(error=dict(code=status,message=message)),status
@@ -134,7 +135,10 @@ def admin_lots():
         return jsonify(records)
 @api.patch("/api/admin/lots/<int:lid>")
 def lot_update(lid):
-    with db().begin() as conn: result=update_lot(conn,lid,body())
+    changes=body()
+    with db().begin() as conn:
+        result=update_lot(conn,lid,changes)
+        conn.execute(lot_updates.insert().values(lot_id=lid,actor_id=g.user["user_id"],changed_at=datetime.now(timezone.utc).isoformat(),changes_json=json.dumps(changes,sort_keys=True)))
     return jsonify(result)
 @api.put("/api/admin/lots/<int:lid>/permits")
 def rules(lid):

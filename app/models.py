@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData, Table, Column, Integer, String, ForeignKey, CheckConstraint, Numeric, Time, Index
+from sqlalchemy import MetaData, Table, Column, Integer, String, ForeignKey, CheckConstraint, Numeric, Time, Index, Text
 metadata=MetaData()
 permits=Table("permit_type",metadata,Column("permit_id",Integer,primary_key=True),Column("name",String(50),nullable=False,unique=True))
 users=Table("user",metadata,Column("user_id",Integer,primary_key=True),Column("email",String(255),nullable=False,unique=True),Column("password_hash",String(255),nullable=False),Column("role",String(10),nullable=False),Column("permit_id",Integer,ForeignKey("permit_type.permit_id")),CheckConstraint("role IN ('student','admin')",name="ck_user_role"))
@@ -8,4 +8,5 @@ Index("ix_class_user_day",classes.c.user_id,classes.c.weekday)
 lots=Table("parking_lot",metadata,Column("lot_id",Integer,primary_key=True),Column("name",String(100),nullable=False),Column("capacity",Integer,nullable=False),Column("available_spaces",Integer,nullable=False),Column("status",String(10),nullable=False),Column("latitude",Numeric(9,6),nullable=False),Column("longitude",Numeric(9,6),nullable=False),Column("updated_at",String(32),nullable=False),CheckConstraint("capacity > 0",name="ck_lot_capacity"),CheckConstraint("available_spaces >= 0 AND available_spaces <= capacity",name="ck_lot_spaces"),CheckConstraint("status IN ('open','closed')",name="ck_lot_status"))
 lot_permits=Table("lot_permit",metadata,Column("lot_id",Integer,ForeignKey("parking_lot.lot_id"),primary_key=True),Column("permit_id",Integer,ForeignKey("permit_type.permit_id"),primary_key=True))
 walks=Table("walk_estimate",metadata,Column("lot_id",Integer,ForeignKey("parking_lot.lot_id"),primary_key=True),Column("building_id",Integer,ForeignKey("building.building_id"),primary_key=True),Column("walking_minutes",Integer,nullable=False),CheckConstraint("walking_minutes > 0",name="ck_walk_minutes"))
+lot_updates=Table("lot_update",metadata,Column("update_id",Integer,primary_key=True),Column("lot_id",Integer,ForeignKey("parking_lot.lot_id"),nullable=False),Column("actor_id",Integer,ForeignKey("user.user_id"),nullable=False),Column("changed_at",String(32),nullable=False),Column("changes_json",Text,nullable=False))
 

@@ -1,0 +1,32 @@
+{
+  "result": "passed",
+  "checks": [
+    "student registration",
+    "permit persistence",
+    "class creation",
+    "Lot B recommendation",
+    "database row verified",
+    "server restart persistence",
+    "admin closure",
+    "Lot A after refresh",
+    "audit transaction",
+    "invalid edit rejected",
+    "valid edit",
+    "delete",
+    "mobile no overflow",
+    "no JavaScript errors"
+  ],
+  "schema_revision": "0002_lot_audit",
+  "saved_class_before_deletion": [
+    "Database Systems",
+    "mvp@example.test",
+    1
+  ],
+  "admin_change": {
+    "lot_id": 2,
+    "status": "closed",
+    "audit_rows": 1
+  },
+  "database_type": "file-backed SQLite",
+  "timezone": "America/New_York"
+}

@@ -7,8 +7,9 @@ import sys
 import time
 ROOT=Path(__file__).resolve().parents[1]
 def run():
+    (ROOT/"artifacts").mkdir(exist_ok=True)
     for args in ([sys.executable,"-m","compileall","-q","app","tests"],
-                 [sys.executable,"-m","pytest","-q"]):
+                 [sys.executable,"-m","pytest","-q","--cov=app","--cov=migrations","--cov-report=term-missing","--cov-report=xml:artifacts/coverage.xml","--cov-report=json:artifacts/coverage.json","--cov-fail-under=85","--junitxml=artifacts/tests.xml"]):
         result=subprocess.run(args,cwd=ROOT)
         if result.returncode: return result.returncode
     return 0

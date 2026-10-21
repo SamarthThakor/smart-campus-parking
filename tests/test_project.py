@@ -12,7 +12,7 @@ FIXED=datetime(2026,10,6,9,0,tzinfo=ZoneInfo("America/New_York"))
 @pytest.fixture()
 def app(tmp_path):
     app=create_app(dict(TESTING=True,SECRET_KEY="test-only",DATABASE_URL="sqlite:///"+str(tmp_path/"test.db").replace("\\","/"),NOW=lambda:FIXED))
-    engine=app.extensions["db"];metadata.create_all(engine)
+    engine=app.extensions["db"]
     with engine.begin() as conn: seed_demo(conn)
     yield app
     engine.dispose()

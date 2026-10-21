@@ -1,0 +1,102 @@
+{
+  "tests": 42,
+  "failures": 0,
+  "errors": 0,
+  "duration_seconds": 52.916,
+  "coverage_percent": 95.16616314199396,
+  "covered_statements": 315,
+  "statements": 331,
+  "coverage_kind": "statement coverage",
+  "files": {
+    "app\\__init__.py": {
+      "covered_lines": 44,
+      "num_statements": 46,
+      "percent_covered": 95.65217391304348,
+      "percent_covered_display": "96",
+      "missing_lines": 2,
+      "excluded_lines": 0,
+      "percent_statements_covered": 95.65217391304348,
+      "percent_statements_covered_display": "96"
+    },
+    "app\\migrations.py": {
+      "covered_lines": 15,
+      "num_statements": 15,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100"
+    },
+    "app\\models.py": {
+      "covered_lines": 11,
+      "num_statements": 11,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100"
+    },
+    "app\\routes.py": {
+      "covered_lines": 147,
+      "num_statements": 153,
+      "percent_covered": 96.07843137254902,
+      "percent_covered_display": "96",
+      "missing_lines": 6,
+      "excluded_lines": 0,
+      "percent_statements_covered": 96.07843137254902,
+      "percent_statements_covered_display": "96"
+    },
+    "app\\seed.py": {
+      "covered_lines": 16,
+      "num_statements": 16,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100"
+    },
+    "app\\services.py": {
+      "covered_lines": 49,
+      "num_statements": 54,
+      "percent_covered": 90.74074074074075,
+      "percent_covered_display": "91",
+      "missing_lines": 5,
+      "excluded_lines": 0,
+      "percent_statements_covered": 90.74074074074075,
+      "percent_statements_covered_display": "91"
+    },
+    "migrations\\env.py": {
+      "covered_lines": 5,
+      "num_statements": 5,
+      "percent_covered": 100.0,
+      "percent_covered_display": "100",
+      "missing_lines": 0,
+      "excluded_lines": 0,
+      "percent_statements_covered": 100.0,
+      "percent_statements_covered_display": "100"
+    },
+    "migrations\\versions\\0001_initial.py": {
+      "covered_lines": 19,
+      "num_statements": 21,
+      "percent_covered": 90.47619047619048,
+      "percent_covered_display": "90",
+      "missing_lines": 2,
+      "excluded_lines": 0,
+      "percent_statements_covered": 90.47619047619048,
+      "percent_statements_covered_display": "90"
+    },
+    "migrations\\versions\\0002_lot_audit.py": {
+      "covered_lines": 9,
+      "num_statements": 10,
+      "percent_covered": 90.0,
+      "percent_covered_display": "90",
+      "missing_lines": 1,
+      "excluded_lines": 0,
+      "percent_statements_covered": 90.0,
+      "percent_statements_covered_display": "90"
+    }
+  }
+}
