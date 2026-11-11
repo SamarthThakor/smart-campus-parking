@@ -56,7 +56,14 @@ Neither is implemented or represented as official university policy. Current
 counts and locations are fictional and are manually updated; no reservations,
 sensor integration, official fines, or measured travel-time savings are claimed.
 
-The Render deployment configuration is ready, but a hosted release is not
-verified until an authorized hosting account, persistent disk, HTTPS endpoint,
-operator account and post-deployment checks are completed. Do not label the
-deployment complete merely because the build or CI succeeds.
+The alpha is merged into main (PR #2) and deployed on AWS Lightsail:
+https://smartcampusparking.34-233-200-219.sslip.io
+
+Backend and browser CI passed before merge. Nineteen live checks passed,
+including trusted HTTPS, secure cookies, authorization, CSRF, student data
+export/deletion and persistence across service restart. Certificate renewal
+dry-run succeeded. See [AWS deployment record](docs/DEPLOYMENT_AWS.md).
+
+The account stays on AWS Free plan and uses promotional credits only. Do not
+upgrade it or authorize card charges. Private administrator creation is still
+an operator handoff; live administrator operations are not yet verified.
