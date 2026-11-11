@@ -2,6 +2,10 @@
 
 Smart Campus Parking | CS 690 | Samarth Thakor and Nirmal Naik
 
+- [Submission PDF](docs/CS690_Milestone4_Team3.pdf)
+- [GitHub repository](https://github.com/SamarthThakor/smart-campus-parking)
+- [Live AWS application](https://smartcampusparking.34-233-200-219.sslip.io/)
+
 The alpha retains the Milestone 3 parking workflow and adds student data export
 and deletion, an administrator history view, persistent login throttling, and
 server-revocable one-hour sessions. It separates HTTP helpers, security,
