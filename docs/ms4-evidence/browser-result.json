@@ -1,0 +1,39 @@
+{
+  "result": "passed",
+  "checks": [
+    "student registration",
+    "permit persistence",
+    "class creation",
+    "Lot B recommendation",
+    "database row verified",
+    "server restart persistence",
+    "admin closure",
+    "Lot A after refresh",
+    "audit transaction",
+    "invalid edit rejected",
+    "valid edit",
+    "delete",
+    "mobile no overflow",
+    "no JavaScript errors",
+    "admin history visible",
+    "owner export without credentials",
+    "stored XSS rendered as text",
+    "mobile layout with hostile text",
+    "privacy notice",
+    "account deletion through UI",
+    "no orphan sessions"
+  ],
+  "schema_revision": "0003_alpha_security",
+  "saved_class_before_deletion": [
+    "Database Systems",
+    "mvp@example.test",
+    1
+  ],
+  "admin_change": {
+    "lot_id": 2,
+    "status": "closed",
+    "audit_rows": 1
+  },
+  "database_type": "file-backed SQLite",
+  "timezone": "America/New_York"
+}

@@ -73,3 +73,20 @@ $("cancel-edit").onclick=resetClassForm;
 $("refresh").onclick=()=>refreshStudent().catch(report);
 $("logout").onclick=async()=>{try{await request("/api/auth/logout","POST",{});location.reload();}catch(error){report(error);}};
 (async()=>{try{csrfToken=(await request("/api/auth/csrf")).csrf_token;const response=await fetch("/api/me");if(response.ok)await show();}catch(error){report(error);}})();
+
+$("delete-account").onsubmit = e => {
+  e.preventDefault();
+  if (!confirm("Permanently delete your account, permit choice and all saved classes? This cannot be undone.")) return;
+  submit(e.target, async () => {
+    await request("/api/me", "DELETE", Object.fromEntries(new FormData(e.target)));
+    location.reload();
+  });
+};
+$("refresh-history").onclick = async () => {
+  try {
+    const rows = await request("/api/admin/history");
+    const box = $("audit-history"); box.replaceChildren();
+    if (!rows.length) box.append(element("p", "No administrator changes recorded."));
+    for (const row of rows) box.append(element("p", dateTime(row.changed_at) + " | Lot " + row.lot_id + " | Administrator " + row.actor_id + " | " + JSON.stringify(row.changes)));
+  } catch (error) { report(error); }
+};

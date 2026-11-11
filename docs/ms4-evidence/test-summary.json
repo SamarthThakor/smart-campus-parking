@@ -1,0 +1,10 @@
+{
+  "tests": 60,
+  "failures": 0,
+  "errors": 0,
+  "seconds": 45.183,
+  "coverage_percent": 94.67554076539102,
+  "covered_statements": 569,
+  "statements": 601,
+  "verification": "Local Python 3.12.14, Windows, SQLite; Chrome browser; November 10-11, 2026"
+}

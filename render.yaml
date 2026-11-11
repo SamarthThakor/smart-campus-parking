@@ -1,0 +1,33 @@
+# Apply only after approving the paid service and persistent disk in Render.
+services:
+  - type: web
+    name: smart-campus-parking-alpha
+    runtime: python
+    plan: starter
+    region: virginia
+    autoDeployTrigger: off
+    buildCommand: pip install -r requirements-prod.txt
+    startCommand: python -m flask --app app:create_app init-catalog && gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 'app:create_app()'
+    healthCheckPath: /api/health
+    disk:
+      name: parking-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.14
+      - key: APP_ENV
+        value: production
+      - key: APP_HTTPS
+        value: '1'
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        value: sqlite:////var/data/parking.db
+      - key: TRUSTED_HOSTS
+        fromService:
+          type: web
+          name: smart-campus-parking-alpha
+          envVarKey: RENDER_EXTERNAL_HOSTNAME
+      - key: CAMPUS_TIMEZONE
+        value: America/New_York
