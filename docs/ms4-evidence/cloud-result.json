@@ -1,0 +1,27 @@
+{
+  "url": "https://smartcampusparking.34-233-200-219.sslip.io",
+  "status": "passed",
+  "checks": [
+    "GET /api/health: 200",
+    "HTTPS trusted; HSTS, CSP and no-store present",
+    "GET /api/me: 401",
+    "GET /api/auth/csrf: 200",
+    "POST /api/auth/register: 201",
+    "POST /api/auth/login: 200",
+    "Session cookie Secure and HttpOnly",
+    "GET /api/permits: 200",
+    "GET /api/buildings: 200",
+    "PATCH /api/me/permit: 200",
+    "POST /api/classes: 201",
+    "GET /api/admin/lots: 403",
+    "POST /api/classes: 403",
+    "GET /api/recommendations: 200",
+    "GET /api/classes: 200",
+    "Class and authenticated session persisted across service restart",
+    "GET /api/me/export: 200",
+    "DELETE /api/me: 204",
+    "GET /api/me: 401"
+  ],
+  "count": 19,
+  "test_account_deleted": true
+}

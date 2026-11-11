@@ -1,14 +1,20 @@
 # AWS alpha deployment plan
 
-Status: AWS host provisioned on 2026-11-11; application installation and HTTPS
-verification are still pending. Do not describe the application as live yet.
+Status: AWS alpha deployed and HTTPS verified on 2026-11-11. Nineteen live
+student/security/persistence checks passed; see ms4-evidence/cloud-result.json.
+Certificate renewal dry-run succeeded and the app/nginx services are active.
+Deployed release: e904ced5c55e1b8858c85efa8363659128d44cc9.
+PR #2 merged into main at 6d28ea88b7fd1c8835babcba1ab55164bffb5a1d after
+GitHub Actions run 43102887970 passed backend and browser tests.
+Administrator creation remains a private operator handoff: the last database
+check found zero administrators. Live admin updates/history are not yet verified.
 The AWS billing console confirms a Free plan that does not charge, with
 USD 100 credits and 182 days remaining when inspected. Do not upgrade this
 account or authorize real-money charges. The user permits free credits only.
 
 Host: smart-campus-parking-alpha, us-east-1a, Ubuntu 24.04, 1 GB RAM / 40 GB SSD.
 Attached static IP: 34.233.200.219 (smart-campus-parking-ip).
-Planned URL: https://smartcampusparking.34-233-200-219.sslip.io
+Live URL: https://smartcampusparking.34-233-200-219.sslip.io
 SSH access is restricted to the Lightsail browser SSH client.
 
 ## Proposed service
