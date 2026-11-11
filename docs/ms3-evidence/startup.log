@@ -1,0 +1,67 @@
+Applying 0001_initial: create seven core tables
+Applying 0002_lot_audit: create lot_update audit table
+Database migration complete: 0002_lot_audit
+Demo data loaded. Local demo password: DemoParking123!
+Database migration complete: 0002_lot_audit
+ * Serving Flask app 'app:create_app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:55772
+Press CTRL+C to quit
+127.0.0.1 - - [20/Oct/2026 19:35:46] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:48] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:49] "GET /static/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:49] "GET /static/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:49] "GET /api/auth/csrf HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:49] "GET /api/me HTTP/1.1" 401 -
+127.0.0.1 - - [20/Oct/2026 19:35:49] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [20/Oct/2026 19:35:50] "POST /api/auth/register HTTP/1.1" 201 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/permits HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/buildings HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "PATCH /api/me/permit HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "POST /api/classes HTTP/1.1" 201 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:51] "GET /api/recommendations HTTP/1.1" 200 -
+Database migration complete: 0002_lot_audit
+ * Serving Flask app 'app:create_app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:55772
+Press CTRL+C to quit
+127.0.0.1 - - [20/Oct/2026 19:35:55] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:55] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:56] "GET /static/style.css HTTP/1.1" 304 -
+127.0.0.1 - - [20/Oct/2026 19:35:56] "GET /static/app.js HTTP/1.1" 304 -
+127.0.0.1 - - [20/Oct/2026 19:35:56] "GET /api/auth/csrf HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:56] "GET /api/me HTTP/1.1" 401 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "GET /api/permits HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "GET /api/buildings HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:57] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:58] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:58] "GET /static/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:58] "GET /static/app.js HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:58] "GET /api/auth/csrf HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:58] "GET /api/me HTTP/1.1" 401 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "POST /api/auth/login HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "GET /api/me HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "GET /api/admin/lots HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "PATCH /api/admin/lots/2 HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "GET /api/admin/lots HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:35:59] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "PATCH /api/classes/8 HTTP/1.1" 400 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "PATCH /api/classes/8 HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "GET /api/classes HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "DELETE /api/classes/8 HTTP/1.1" 204 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "GET /api/recommendations HTTP/1.1" 200 -
+127.0.0.1 - - [20/Oct/2026 19:36:00] "GET /api/classes HTTP/1.1" 200 -
