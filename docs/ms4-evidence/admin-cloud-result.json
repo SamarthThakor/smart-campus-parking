@@ -1,0 +1,18 @@
+{
+  "date": "2026-11-11",
+  "url": "https://smartcampusparking.34-233-200-219.sslip.io/",
+  "status": "passed",
+  "method": "Live browser UI",
+  "checks": [
+    "Administrator login displays Parking administration",
+    "Lot A initial state: 10 spaces, open",
+    "Save Lot A: 9 spaces, open",
+    "Reload confirms persisted count of 9",
+    "Refresh history displays update to 9",
+    "Restore Lot A: 10 spaces, open",
+    "Refresh history displays both update and restoration",
+    "Sign out returns to login page"
+  ],
+  "credentials_included": false,
+  "original_lot_state_restored": true
+}

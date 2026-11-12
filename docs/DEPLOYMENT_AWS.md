@@ -6,8 +6,9 @@ Certificate renewal dry-run succeeded and the app/nginx services are active.
 Deployed release: e904ced5c55e1b8858c85efa8363659128d44cc9.
 PR #2 merged into main at 6d28ea88b7fd1c8835babcba1ab55164bffb5a1d after
 GitHub Actions run 43102887970 passed backend and browser tests.
-Administrator creation remains a private operator handoff: the last database
-check found zero administrators. Live admin updates/history are not yet verified.
+The privately created administrator was verified through live login, lot update,
+page reload persistence, history display, restoration and sign-out. Lot A was
+restored to its original 10 spaces/open state. See ms4-evidence/admin-cloud-result.json.
 The AWS billing console confirms a Free plan that does not charge, with
 USD 100 credits and 182 days remaining when inspected. Do not upgrade this
 account or authorize real-money charges. The user permits free credits only.
