@@ -69,5 +69,5 @@ export/deletion and persistence across service restart. Certificate renewal
 dry-run succeeded. See [AWS deployment record](docs/DEPLOYMENT_AWS.md).
 
 The account stays on AWS Free plan and uses promotional credits only. Do not
-upgrade it or authorize card charges. Private administrator creation is still
-an operator handoff; live administrator operations are not yet verified.
+upgrade it or authorize card charges. Live administrator login, lot updates, reload persistence, audit history and
+sign-out have also been verified. The original lot count was restored afterward.
